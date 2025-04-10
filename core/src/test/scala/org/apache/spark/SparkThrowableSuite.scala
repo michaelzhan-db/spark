@@ -21,6 +21,7 @@ import java.io.File
 import java.nio.charset.StandardCharsets
 import java.nio.file.Files
 
+import scala.jdk.CollectionConverters._
 import scala.util.Properties.lineSeparator
 
 import com.fasterxml.jackson.annotation.JsonInclude.Include
@@ -503,6 +504,19 @@ class SparkThrowableSuite extends SparkFunSuite {
 
       assert(errorMessage.contains("Parameter null is missing."))
     }
+  }
+
+  test("getCondition should return FALLBACK_ERROR_CLASS when condition is None") {
+    val params = Map("key" -> "value")
+    val errorMsg = "Test error message"
+    val e = new SparkUnsupportedOperationException(
+      null,
+      params
+    )
+    assert(e.getCondition() == "FALLBACK_ERROR_CLASS")
+    // The message is not overriden so it is the same error message
+    assert(e.getMessage() == errorMsg)
+    assert(e.getMessageParameters().asScala == params)
   }
 
   test("detect unused message parameters") {

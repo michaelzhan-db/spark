@@ -6499,6 +6499,13 @@
     ],
     "sqlState" : "42KDF"
   },
+  "_FALLBACK_ERROR" : {
+    "message" : [
+      "This exception was created without an error class.",
+      "Please report a bug: https://issues.apache.org/jira/browse/SPARK."
+    ],
+    "sqlState" : "XX000"
+  },
   "_LEGACY_ERROR_TEMP_0001" : {
     "message" : [
       "Invalid InsertIntoContext."

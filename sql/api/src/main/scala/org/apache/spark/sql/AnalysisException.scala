@@ -19,7 +19,7 @@ package org.apache.spark.sql
 
 import scala.jdk.CollectionConverters._
 
-import org.apache.spark.{QueryContext, SparkThrowable, SparkThrowableHelper}
+import org.apache.spark.{FallbackSparkThrowable, QueryContext, SparkThrowableHelper}
 import org.apache.spark.annotation.Stable
 import org.apache.spark.sql.catalyst.trees.{Origin, WithOrigin}
 
@@ -38,7 +38,7 @@ class AnalysisException protected (
     val messageParameters: Map[String, String] = Map.empty,
     val context: Array[QueryContext] = Array.empty)
     extends Exception(message, cause.orNull)
-    with SparkThrowable
+    with FallbackSparkThrowable
     with Serializable
     with WithOrigin {
 
